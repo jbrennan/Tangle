@@ -25,9 +25,9 @@ Tangle.classes.TKIf = {
     },
     
     update: function (element, value) {
-        if (this.isInverted) { value = !value; };
-        if (value) { element.style.removeProperty('display'); } 
-		else { element.style.display = "none" };
+        if (this.isInverted) { value = !value; }
+        if (value) { element.style.removeProperty("display"); } 
+        else { element.style.display = "none" };
     }
 };
 
@@ -44,8 +44,8 @@ Tangle.classes.TKSwitch = {
 
     update: function (element, value) {
         element.getChildren().each( function (child, index) {
-            if (index != value) { child.style.display = 'none'; } 
-			else { child.style.removeProperty('display'); }
+            if (index != value) { child.style.display = "none"; } 
+            else { child.style.removeProperty("display"); }
         });
     }
 };
