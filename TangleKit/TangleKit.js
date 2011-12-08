@@ -131,6 +131,7 @@ Tangle.classes.TKNumberField = {
 //  Attributes:  data-min (optional): minimum value
 //               data-max (optional): maximum value
 //               data-step (optional): granularity of adjustment (can be fractional)
+//               data-help (optional): the help text that appears above the value. defaults to "« drag »"
 
 var isAnyAdjustableNumberDragging = false;  // hack for dragging one value over another one
 
@@ -144,6 +145,7 @@ Tangle.classes.TKAdjustableNumber = {
         this.min = (options.min !== undefined) ? parseFloat(options.min) : 0;
         this.max = (options.max !== undefined) ? parseFloat(options.max) : 1e100;
         this.step = (options.step !== undefined) ? parseFloat(options.step) : 1;
+        this.help = (options.help !== undefined) ? options.step : "« drag »";
         
         this.initializeHover();
         this.initializeHelp();
@@ -189,15 +191,19 @@ Tangle.classes.TKAdjustableNumber = {
     initializeHelp: function () {
         this.helpElement = (new Element("div", { "class": "TKAdjustableNumberHelp" })).inject(this.element, "top");
         this.helpElement.setStyle("display", "none");
-        this.helpElement.set("text", "drag");
+        this.helpElement.set("text", this.help);
     },
     
     updateHelp: function () {
-        var size = this.element.getSize();
-        var top = -size.y + 7;
-        var left = Math.round(0.5 * (size.x - 20));
-        var display = (this.isHovering && !isAnyAdjustableNumberDragging) ? "block" : "none";
-        this.helpElement.setStyles({ left:left, top:top, display:display });
+        var show = (this.isHovering && !isAnyAdjustableNumberDragging)
+        if (show) {
+            this.helpElement.setStyle("display", "block");
+            var top = - this.helpElement.getSize().y * 0.5;
+            var left = Math.round(0.5 * (this.element.getSize().x - this.helpElement.getSize().x));
+            this.helpElement.setStyles({ left:left, top:top });
+        } else {
+            this.helpElement.setStyle("display", "none");
+        }
     },
 
 
