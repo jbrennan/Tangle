@@ -195,7 +195,7 @@ Tangle.classes.TKAdjustableNumber = {
     },
     
     updateHelp: function () {
-        var show = (this.isHovering && !isAnyAdjustableNumberDragging)
+        var show = ((this.isHovering && !isAnyAdjustableNumberDragging) || this.isDragging)
         if (show) {
             this.helpElement.setStyle("display", "block");
             var top = - this.helpElement.getSize().y * 0.5;
