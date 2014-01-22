@@ -48,3 +48,6 @@
 	font: 9px "Helvetica-Neue", "Arial", sans-serif;
 }
 
+.TKAdjustableNumberDown .TKAdjustableNumberHelp {
+    color: #f00;
+}
